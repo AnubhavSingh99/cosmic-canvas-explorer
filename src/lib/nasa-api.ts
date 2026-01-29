@@ -1,7 +1,5 @@
-// NASA API utilities
-import { supabase } from "@/integrations/supabase/client";
-
 const NASA_IMAGE_API_BASE = "https://images-api.nasa.gov";
+const NASA_API_KEY = import.meta.env.VITE_NASA_API_KEY || "DEMO_KEY";
 
 export interface NASAImageItem {
   nasa_id: string;
@@ -113,15 +111,13 @@ export async function getNASAImageMetadata(nasaId: string): Promise<NASAImageIte
 }
 
 export async function getAPOD(): Promise<APODData> {
-  const { data, error } = await supabase.functions.invoke("nasa-apod");
+  const response = await fetch(
+    `https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`
+  );
 
-  if (error) {
-    throw new Error(error.message || "Failed to fetch APOD");
+  if (!response.ok) {
+    throw new Error("Failed to fetch APOD");
   }
 
-  if (data.error) {
-    throw new Error(data.error);
-  }
-
-  return data as APODData;
+  return response.json();
 }
