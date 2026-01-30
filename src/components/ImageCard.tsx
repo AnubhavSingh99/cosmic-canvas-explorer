@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Calendar } from "lucide-react";
 import { NASAImageItem } from "@/lib/nasa-api";
 import { Card, CardContent } from "@/components/ui/card";
+import FavoriteButton from "./FavoriteButton";
 
 interface ImageCardProps {
   image: NASAImageItem;
@@ -27,6 +28,10 @@ const ImageCard = ({ image }: ImageCardProps) => {
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 transition-opacity group-hover:opacity-80" />
+          {/* Favorite Button */}
+          <div className="absolute right-2 top-2 opacity-0 transition-opacity group-hover:opacity-100">
+            <FavoriteButton image={image} size="sm" />
+          </div>
         </div>
         <CardContent className="relative -mt-12 space-y-2 p-4">
           {formattedDate && (

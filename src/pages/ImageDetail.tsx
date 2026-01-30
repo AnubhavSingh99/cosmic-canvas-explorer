@@ -6,6 +6,8 @@ import { getNASAImageAsset, getNASAImageMetadata } from "@/lib/nasa-api";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import FavoriteButton from "@/components/FavoriteButton";
+import AIExplanation from "@/components/AIExplanation";
 
 const ImageDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -115,6 +117,8 @@ const ImageDetail = () => {
                 <Badge className="bg-primary/20 text-primary">
                   {metadata.nasa_id}
                 </Badge>
+                {/* Favorite Button */}
+                <FavoriteButton image={metadata} size="lg" />
               </div>
 
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -126,6 +130,18 @@ const ImageDetail = () => {
                   <p className="whitespace-pre-wrap text-lg leading-relaxed text-muted-foreground">
                     {metadata.description.replace(/<[^>]*>/g, "")}
                   </p>
+                </div>
+              )}
+
+              {/* AI Explanation Section */}
+              {largeImage && (
+                <div className="space-y-4 rounded-lg border border-border/50 bg-card/30 p-4">
+                  <h3 className="font-semibold">AI-Powered Explanation</h3>
+                  <AIExplanation
+                    imageUrl={largeImage}
+                    title={metadata.title}
+                    description={metadata.description}
+                  />
                 </div>
               )}
 
