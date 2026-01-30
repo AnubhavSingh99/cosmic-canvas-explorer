@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
-import { Rocket } from "lucide-react";
+import { Rocket, Star } from "lucide-react";
+import { useFavorites } from "@/hooks/useFavorites";
 
 const Header = () => {
+  const { favorites } = useFavorites();
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -20,6 +23,18 @@ const Header = () => {
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             Home
+          </Link>
+          <Link
+            to="/favorites"
+            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Star className="h-4 w-4" />
+            Favorites
+            {favorites.length > 0 && (
+              <span className="ml-1 rounded-full bg-primary/20 px-2 py-0.5 text-xs font-semibold text-primary">
+                {favorites.length}
+              </span>
+            )}
           </Link>
         </nav>
       </div>
