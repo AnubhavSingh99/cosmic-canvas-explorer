@@ -19,9 +19,24 @@ serve(async (req) => {
       throw new Error("NASA_API_KEY is not configured");
     }
 
-    const response = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`
-    );
+    // Parse request body for optional date parameter
+    let date: string | null = null;
+    if (req.method === "POST") {
+      try {
+        const body = await req.json();
+        date = body.date || null;
+      } catch {
+        // No body or invalid JSON, use today's date
+      }
+    }
+
+    // Build API URL with optional date
+    let apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`;
+    if (date) {
+      apiUrl += `&date=${date}`;
+    }
+
+    const response = await fetch(apiUrl);
 
     if (!response.ok) {
       const errorText = await response.text();

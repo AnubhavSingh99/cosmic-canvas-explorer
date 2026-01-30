@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Rocket, Star } from "lucide-react";
+import { Rocket, Star, Calendar, Map } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 
 const Header = () => {
@@ -17,7 +17,7 @@ const Header = () => {
             NASA Explorer
           </span>
         </Link>
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-4 sm:gap-6">
           <Link
             to="/"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -25,13 +25,27 @@ const Header = () => {
             Home
           </Link>
           <Link
+            to="/missions"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Map className="h-4 w-4" />
+            Missions
+          </Link>
+          <Link
+            to="/history"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Calendar className="h-4 w-4" />
+            History
+          </Link>
+          <Link
             to="/favorites"
             className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             <Star className="h-4 w-4" />
-            Favorites
+            <span className="hidden sm:inline">Favorites</span>
             {favorites.length > 0 && (
-              <span className="ml-1 rounded-full bg-primary/20 px-2 py-0.5 text-xs font-semibold text-primary">
+              <span className="rounded-full bg-primary/20 px-2 py-0.5 text-xs font-semibold text-primary">
                 {favorites.length}
               </span>
             )}

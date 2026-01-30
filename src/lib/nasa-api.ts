@@ -125,3 +125,19 @@ export async function getAPOD(): Promise<APODData> {
 
   return data as APODData;
 }
+
+export async function getAPODByDate(date: string): Promise<APODData> {
+  const { data, error } = await supabase.functions.invoke("nasa-apod", {
+    body: { date },
+  });
+
+  if (error) {
+    throw new Error(error.message || "Failed to fetch APOD");
+  }
+
+  if (data.error) {
+    throw new Error(data.error);
+  }
+
+  return data as APODData;
+}
