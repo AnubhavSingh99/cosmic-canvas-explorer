@@ -123,6 +123,13 @@ const ImageDetail = () => {
                 <FavoriteButton image={metadata} size="lg" />
               </div>
 
+              {/* Share & Download */}
+              <ShareDownload
+                title={metadata.title}
+                imageUrl={largeImage}
+                nasaId={metadata.nasa_id}
+              />
+
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 {metadata.title}
               </h1>
