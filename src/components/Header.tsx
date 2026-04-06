@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Rocket, Star, Calendar, Map } from "lucide-react";
+import { Rocket, Star, Calendar, Map, ScanSearch } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 
 const Header = () => {
@@ -37,6 +37,13 @@ const Header = () => {
           >
             <Calendar className="h-4 w-4" />
             History
+          </Link>
+          <Link
+            to="/scan"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ScanSearch className="h-4 w-4" />
+            AstroScan
           </Link>
           <Link
             to="/favorites"
