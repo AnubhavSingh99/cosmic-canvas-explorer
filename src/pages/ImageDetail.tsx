@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import FavoriteButton from "@/components/FavoriteButton";
 import AIExplanation from "@/components/AIExplanation";
+import ShareDownload from "@/components/ShareDownload";
 
 const ImageDetail = () => {
   const { id } = useParams<{ id: string }>();
