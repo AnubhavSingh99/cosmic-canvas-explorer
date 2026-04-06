@@ -2,6 +2,7 @@ import { Stars } from "lucide-react";
 import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
 import APODCard from "@/components/APODCard";
+import FeaturedMissions from "@/components/FeaturedMissions";
 import spaceBg from "@/assets/space-bg.jpg";
 
 const Index = () => {
@@ -68,6 +69,9 @@ const Index = () => {
         </div>
         <APODCard />
       </section>
+
+      {/* Featured Missions */}
+      <FeaturedMissions />
 
       {/* Footer */}
       <footer className="border-t border-border/50 bg-card/30">

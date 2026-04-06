@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import FavoriteButton from "@/components/FavoriteButton";
 import AIExplanation from "@/components/AIExplanation";
+import ShareDownload from "@/components/ShareDownload";
 
 const ImageDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -121,6 +122,13 @@ const ImageDetail = () => {
                 {/* Favorite Button */}
                 <FavoriteButton image={metadata} size="lg" />
               </div>
+
+              {/* Share & Download */}
+              <ShareDownload
+                title={metadata.title}
+                imageUrl={largeImage}
+                nasaId={metadata.nasa_id}
+              />
 
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 {metadata.title}
