@@ -7,6 +7,7 @@ import ImageGrid from "@/components/ImageGrid";
 import AIExplanation from "@/components/AIExplanation";
 import { getMissionById, TimelineEvent } from "@/data/missions";
 import { searchNASAImages } from "@/lib/nasa-api";
+import { recommendMissionsForMission } from "@/lib/recommendations";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -218,6 +219,48 @@ const MissionDetail = () => {
           </div>
           <ImageGrid images={images.slice(0, 8)} isLoading={isLoadingImages} />
         </div>
+
+        {/* You may also like — related missions */}
+        {(() => {
+          const related = recommendMissionsForMission(mission, 3);
+          if (related.length === 0) return null;
+          return (
+            <div className="mt-16">
+              <h2 className="mb-6 text-2xl font-bold tracking-tight">
+                You may also like
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {related.map((m) => (
+                  <Link
+                    key={m.id}
+                    to={`/mission/${m.id}`}
+                    className="group rounded-lg border border-border/50 bg-card/30 p-5 transition-colors hover:border-primary/40 hover:bg-primary/5"
+                  >
+                    <div className="mb-3 flex items-center gap-2">
+                      <div className="rounded-md bg-primary/15 p-2">
+                        <Rocket className="h-4 w-4 text-primary" />
+                      </div>
+                      <h3 className="font-semibold group-hover:text-primary">
+                        {m.name}
+                      </h3>
+                    </div>
+                    <p className="line-clamp-3 text-sm text-muted-foreground">
+                      {m.summary}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      <Badge variant="outline" className="text-xs">
+                        {m.target}
+                      </Badge>
+                      <Badge variant="outline" className="text-xs">
+                        {m.launchYear}
+                      </Badge>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
       </main>
     </div>
   );
