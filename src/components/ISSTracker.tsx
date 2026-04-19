@@ -125,7 +125,7 @@ const ISSTracker = ({ compact = false }: ISSTrackerProps) => {
             </div>
 
             {!compact && (
-              <div className="relative aspect-[2/1] overflow-hidden rounded-md border border-border/50 bg-[#0b1d33]">
+              <div className="relative aspect-[2/1] overflow-hidden rounded-md border border-border/50 bg-muted/40">
                 {/* Simple equirectangular world graphic via SVG */}
                 <svg
                   viewBox="0 0 360 180"

@@ -13,6 +13,8 @@ import MissionDetail from "./pages/MissionDetail";
 import History from "./pages/History";
 import Scan from "./pages/Scan";
 import Assistant from "./pages/Assistant";
+import Dashboard from "./pages/Dashboard";
+import Tracker from "./pages/Tracker";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +36,8 @@ const App = () => (
             <Route path="/history" element={<History />} />
             <Route path="/scan" element={<Scan />} />
             <Route path="/assistant" element={<Assistant />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/tracker" element={<Tracker />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
