@@ -15,6 +15,7 @@ import Scan from "./pages/Scan";
 import Assistant from "./pages/Assistant";
 import Dashboard from "./pages/Dashboard";
 import Tracker from "./pages/Tracker";
+import Learn from "./pages/Learn";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/assistant" element={<Assistant />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tracker" element={<Tracker />} />
+            <Route path="/learn" element={<Learn />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
