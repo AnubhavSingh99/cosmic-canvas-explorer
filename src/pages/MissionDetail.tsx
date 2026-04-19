@@ -8,6 +8,7 @@ import AIExplanation from "@/components/AIExplanation";
 import { getMissionById, TimelineEvent } from "@/data/missions";
 import { searchNASAImages } from "@/lib/nasa-api";
 import { recommendMissionsForMission } from "@/lib/recommendations";
+import ResearchExport from "@/components/ResearchExport";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

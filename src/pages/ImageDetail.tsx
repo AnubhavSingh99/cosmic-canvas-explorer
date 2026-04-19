@@ -11,6 +11,7 @@ import AIExplanation from "@/components/AIExplanation";
 import ShareDownload from "@/components/ShareDownload";
 import ContextPanel from "@/components/ContextPanel";
 import RecommendationPanel from "@/components/RecommendationPanel";
+import ResearchExport from "@/components/ResearchExport";
 
 const ImageDetail = () => {
   const { id } = useParams<{ id: string }>();
