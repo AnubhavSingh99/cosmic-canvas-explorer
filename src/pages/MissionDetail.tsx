@@ -8,6 +8,7 @@ import AIExplanation from "@/components/AIExplanation";
 import { getMissionById, TimelineEvent } from "@/data/missions";
 import { searchNASAImages } from "@/lib/nasa-api";
 import { recommendMissionsForMission } from "@/lib/recommendations";
+import ResearchExport from "@/components/ResearchExport";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -129,10 +130,29 @@ const MissionDetail = () => {
 
           {/* Summary */}
           <Card className="border-border/50 bg-card/50">
-            <CardContent className="pt-6">
+            <CardContent className="space-y-4 pt-6">
               <p className="text-lg leading-relaxed text-muted-foreground">
                 {mission.summary}
               </p>
+              <ResearchExport
+                title={mission.name}
+                filename={mission.id}
+                sourceUrl={typeof window !== "undefined" ? window.location.href : undefined}
+                sections={[
+                  { heading: "Full name", body: mission.fullName },
+                  { heading: "Agency", body: mission.agency },
+                  { heading: "Target", body: mission.target },
+                  { heading: "Years", body: yearRange },
+                  { heading: "Status", body: status.label },
+                  { heading: "Summary", body: mission.summary },
+                  {
+                    heading: "Timeline",
+                    body: mission.timeline
+                      .map((e) => `- ${e.date} — ${e.title}: ${e.description}`)
+                      .join("\n"),
+                  },
+                ]}
+              />
             </CardContent>
           </Card>
         </div>

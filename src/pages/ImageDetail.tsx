@@ -11,6 +11,7 @@ import AIExplanation from "@/components/AIExplanation";
 import ShareDownload from "@/components/ShareDownload";
 import ContextPanel from "@/components/ContextPanel";
 import RecommendationPanel from "@/components/RecommendationPanel";
+import ResearchExport from "@/components/ResearchExport";
 
 const ImageDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -124,12 +125,24 @@ const ImageDetail = () => {
                 <FavoriteButton image={metadata} size="lg" />
               </div>
 
-              {/* Share & Download */}
-              <ShareDownload
-                title={metadata.title}
-                imageUrl={largeImage}
-                nasaId={metadata.nasa_id}
-              />
+              {/* Share, Download & Export */}
+              <div className="flex flex-wrap items-center gap-2">
+                <ShareDownload
+                  title={metadata.title}
+                  imageUrl={largeImage}
+                  nasaId={metadata.nasa_id}
+                />
+                <ResearchExport
+                  title={metadata.title}
+                  sourceUrl={typeof window !== "undefined" ? window.location.href : undefined}
+                  filename={metadata.nasa_id}
+                  sections={[
+                    { heading: "Date", body: formattedDate || "" },
+                    { heading: "NASA ID", body: metadata.nasa_id },
+                    { heading: "Description", body: metadata.description || "" },
+                  ]}
+                />
+              </div>
 
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 {metadata.title}

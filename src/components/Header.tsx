@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Rocket, Star, Calendar, Map, ScanSearch, Sparkles, LayoutDashboard, Satellite } from "lucide-react";
+import { Rocket, Star, Calendar, Map, ScanSearch, Sparkles, LayoutDashboard, Satellite, GraduationCap } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 
 const Header = () => {
@@ -65,6 +65,13 @@ const Header = () => {
           >
             <Sparkles className="h-4 w-4" />
             Assistant
+          </Link>
+          <Link
+            to="/learn"
+            className="hidden md:flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <GraduationCap className="h-4 w-4" />
+            Learn
           </Link>
           <Link
             to="/favorites"
