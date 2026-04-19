@@ -1,15 +1,16 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, Calendar, ExternalLink, Image, Loader2, Rocket } from "lucide-react";
+import { ArrowLeft, Calendar, ExternalLink, Image, Loader2 } from "lucide-react";
 import Header from "@/components/Header";
 import { getNASAImageAsset, getNASAImageMetadata } from "@/lib/nasa-api";
-import { getMissionsForImage } from "@/data/missions";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import FavoriteButton from "@/components/FavoriteButton";
 import AIExplanation from "@/components/AIExplanation";
 import ShareDownload from "@/components/ShareDownload";
+import ContextPanel from "@/components/ContextPanel";
+import RecommendationPanel from "@/components/RecommendationPanel";
 
 const ImageDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -154,31 +155,18 @@ const ImageDetail = () => {
                 </div>
               )}
 
-              {/* Related Missions */}
-              {metadata && (() => {
-                const relatedMissions = getMissionsForImage(metadata.title, metadata.description || "");
-                if (relatedMissions.length === 0) return null;
-                return (
-                  <div className="space-y-3 rounded-lg border border-border/50 bg-card/30 p-4">
-                    <h3 className="font-semibold flex items-center gap-2">
-                      <Rocket className="h-4 w-4 text-primary" />
-                      Related Missions
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {relatedMissions.map(mission => (
-                        <Link
-                          key={mission.id}
-                          to={`/mission/${mission.id}`}
-                          className="inline-flex items-center gap-1.5 rounded-md border border-primary/30 bg-primary/10 px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
-                        >
-                          <Rocket className="h-3.5 w-3.5" />
-                          {mission.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })()}
+              {/* Context: related missions, key topics, history */}
+              <ContextPanel
+                title={metadata.title}
+                description={metadata.description || ""}
+                date={metadata.date_created}
+              />
+
+              {/* Smart recommendations */}
+              <RecommendationPanel
+                sourceText={`${metadata.title} ${metadata.description || ""}`}
+                excludeIds={[metadata.nasa_id]}
+              />
 
               {/* Download Links */}
               {assets.length > 0 && (
