@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import { Upload, ScanSearch, Sparkles, AlertTriangle, ChevronDown, ChevronUp } from "lucide-react";
+import { Upload, ScanSearch, Sparkles, AlertTriangle, ChevronDown, ChevronUp, Search, GraduationCap, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -262,6 +263,37 @@ const Scan = () => {
                         {relatedImages.map((img) => (
                           <ImageCard key={img.nasa_id} image={img} />
                         ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Explore More */}
+                  {result.is_astronomical && result.object_name && (
+                    <div className="rounded-lg border border-primary/30 bg-primary/5 p-5">
+                      <h3 className="mb-3 font-semibold">Explore more</h3>
+                      <div className="flex flex-wrap gap-2">
+                        <Link
+                          to={`/search?q=${encodeURIComponent(result.object_name)}`}
+                          className="inline-flex items-center gap-1.5 rounded-md border border-border/50 bg-card/50 px-3 py-1.5 text-sm font-medium hover:border-primary/50 hover:bg-primary/10 hover:text-primary"
+                        >
+                          <Search className="h-3.5 w-3.5" />
+                          Search NASA for "{result.object_name}"
+                        </Link>
+                        <Link
+                          to="/assistant"
+                          className="inline-flex items-center gap-1.5 rounded-md border border-border/50 bg-card/50 px-3 py-1.5 text-sm font-medium hover:border-primary/50 hover:bg-primary/10 hover:text-primary"
+                        >
+                          <Sparkles className="h-3.5 w-3.5" />
+                          Ask the AI assistant
+                        </Link>
+                        <Link
+                          to="/learn"
+                          className="inline-flex items-center gap-1.5 rounded-md border border-border/50 bg-card/50 px-3 py-1.5 text-sm font-medium hover:border-primary/50 hover:bg-primary/10 hover:text-primary"
+                        >
+                          <GraduationCap className="h-3.5 w-3.5" />
+                          Start a learning path
+                          <ArrowRight className="h-3 w-3" />
+                        </Link>
                       </div>
                     </div>
                   )}
