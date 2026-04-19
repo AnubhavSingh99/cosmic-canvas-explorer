@@ -40,7 +40,18 @@ serve(async (req) => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`NASA API error: ${response.status} - ${errorText}`);
+      console.error(`NASA API error: ${response.status} - ${errorText}`);
+      const isUpstream = response.status >= 500 || response.status === 429;
+      return new Response(
+        JSON.stringify({
+          error: isUpstream ? "NASA_API_UNAVAILABLE" : `NASA API error: ${response.status}`,
+          fallback: isUpstream,
+        }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 200,
+        }
+      );
     }
 
     const data = await response.json();
@@ -53,10 +64,10 @@ serve(async (req) => {
     console.error("Error fetching APOD:", error);
     const errorMessage = error instanceof Error ? error.message : "Failed to fetch APOD";
     return new Response(
-      JSON.stringify({ error: errorMessage }),
+      JSON.stringify({ error: errorMessage, fallback: true }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 500,
+        status: 200,
       }
     );
   }
