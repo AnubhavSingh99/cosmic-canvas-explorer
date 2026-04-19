@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Rocket, Star, Calendar, Map, ScanSearch, Sparkles } from "lucide-react";
+import { Rocket, Star, Calendar, Map, ScanSearch, Sparkles, LayoutDashboard, Satellite } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 
 const Header = () => {
@@ -23,6 +23,20 @@ const Header = () => {
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             Home
+          </Link>
+          <Link
+            to="/dashboard"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <LayoutDashboard className="h-4 w-4" />
+            Dashboard
+          </Link>
+          <Link
+            to="/tracker"
+            className="hidden md:flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Satellite className="h-4 w-4" />
+            Tracker
           </Link>
           <Link
             to="/missions"
